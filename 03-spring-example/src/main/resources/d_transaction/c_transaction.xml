@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           https://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   <!-- TransactionProxyFactoryBean事务-->
+   <!-- 1.数据源（dbcp）-->
+   <bean id="dataSource"  class="org.apache.commons.dbcp2.BasicDataSource">
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+      <property name="url" value="jdbc:mysql://localhost:3306/study"></property>
+      <property name="username" value="root"></property>
+      <property name="password" value="0607"></property>
+   </bean>
+   <!-- 2.Dao bean -->
+   <bean id="accountDao" class="com.chifuyong.d_transaction.dao.impl.AccountDaoImpl">
+      <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   <!-- 3.Service bean -->
+   <bean id="accountService" class="com.chifuyong.d_transaction.service.impl.AccountServiceImpl">
+      <property name="accountDao" ref="accountDao"></property>
+   </bean>
+   <!-- 4.事务管理器 -->
+   <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   <!-- 6.配置事务详情（相当于一个切面） -->
+   <tx:advice id="txAdvice" transaction-manager="txManager">
+      <!-- 配置事务详情（属性） -->
+      <tx:attributes>
+         <!-- 具体方法上的事务配置
+              propagation：传播行为
+              isolation：隔离级别
+         -->
+         <tx:method name="transfer" propagation="REQUIRED" isolation="DEFAULT"/>
+      </tx:attributes>
+   </tx:advice>
+   <!-- 7.Aop配置（Spring方式）-->
+   <aop:config>
+      <!-- 具体到 某个方法 有没有事务还得看事务管理器上的配置 -->
+      <aop:pointcut id="testPointcut" expression="execution(* com.chifuyong.d_transaction.service.impl.AccountServiceImpl.*(..))"/>
+      <aop:advisor advice-ref="txAdvice" pointcut-ref="testPointcut"></aop:advisor>
+   </aop:config>
+
+</beans>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--1.默认构造方法装配 Bean
+        作用域 scope: 1) singleton > IOC容器中只存在一个 Bean 实例,也就是单例,也是默认值
+                     2) prototype > IOC容器调用一次 Bean,就返回一个新实例
+                     注: 以下三个只适用于 WebApplicationContext
+                     3) request > 每次 Http 请求都会创建一个新 Bean
+                     4) session > 同个 Http Session 共享一个 Bean,不同 Session 使用不同 Bean
+                     5) globalSession > 一般用于 Portlet 应用环境
+    -->
+    <bean id="service" class="com.chifuyong.a_ioc.ServiceImpl" scope="prototype"></bean>
+
+    <!-- 2.DI(依赖注入)-->
+    <bean id="userService" class="com.chifuyong.a_ioc.a_di.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <bean id="userDao" class="com.chifuyong.a_ioc.a_di.UserDaoImpl"></bean>
+
+
+</beans>

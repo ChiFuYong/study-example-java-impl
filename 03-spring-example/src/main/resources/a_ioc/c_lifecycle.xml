@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean 的生命周期 -->
+    <bean id="service" class="com.chifuyong.a_ioc.ServiceImpl" init-method="init" destroy-method="destory"></bean>
+
+    <bean id="service2" class="com.chifuyong.a_ioc.ServiceImpl"></bean>
+
+    <!-- 后处理 bean 配置,在 bean 初始化之后可以修改 bean
+         对所有配置过的 bean 都生效,想要只作用一个，使用 参数2：beanName 来过滤
+    -->
+    <bean class="com.chifuyong.a_ioc.TestBeanPostProcessor"></bean>
+
+</beans>

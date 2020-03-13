@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+	    http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 1.配置注解扫描器 -->
+	<context:component-scan base-package="com.chifuyong.controller"></context:component-scan>
+
+	<!-- 2.注解驱动
+		  org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping
+	      org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter
+		  默认创建注解处理器映射器，注解处理器适配器。提供json格式支持。 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<!-- 2. 配置注解处理器映射器
+		    功能：寻找执行类Controller -->
+<!--	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>-->
+
+	<!-- 3. 配置注解处理器适配器
+			功能：调用controller方法，执行controller -->
+<!--	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		&lt;!&ndash; @ResponseBody 转json配置 &ndash;&gt;
+		<property name="messageConverters">
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+		</property>
+	</bean>-->
+
+    <!-- 视图解析器配置 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="prefix" value="/WEB-INF/views/"></property>
+    	<property name="suffix" value=".jsp"></property>
+    </bean>
+
+	<!-- MultipartResovler 解析器
+	        作用： 1.把客户端上传的文件流转换成 MutipartFile 封装类
+	              2.通过 MutipartFile 封装类获取到文件流  -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传的文件的大小（bit）,所有文件总大小 -->
+		<property name="maxUploadSize" value="500000000"></property>
+		<!-- 这里设置默认的文件编码为UTF-8，必须与用户JSP的默认编码一致   -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+
+	<!-- 异常解析器 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 上传文件过大错误页面-->
+				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error</prop>
+				<!-- 空指针异常页面 -->
+				<prop key="java.lang.NullPointerException">error2</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 拦截器配置（Interceptor）
+		1. 多个拦截器同时生效时,组成了拦截器栈
+		2. 顺序:先进后出.
+		3. 执行顺序和在 SpringMVC.xml 中配置顺序有关
+		4. 设置先配置拦截器 A 再配置拦截器 B 执行顺序为:
+			preHandle(A) -> preHandle(B) -> 控制器方法 -> postHandle(B) -> postHanle(A) -> JSP -> afterCompletion(B) -> afterCompletion(A)
+	-->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 指定拦截器 拦截 指定Controller路径 -->
+			<mvc:mapping path="/interceptor/interceptor"/>
+			<bean class="com.chifuyong.interceptor.TestInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- 所有的 Controller 都拦截-->
+	<!--<mvc:interceptors>
+		<bean class="com.chifuyong.interceptor.TestInterceptor"></bean>
+	</mvc:interceptors>-->
+
+</beans>

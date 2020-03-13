@@ -1,0 +1,21 @@
+package com.chifuyong.behavioralpatterns.strategy.impl;
+
+import com.chifuyong.behavioralpatterns.strategy.interfac.Strategy;
+
+import java.math.BigDecimal;
+
+/** 
+* 分期还本
+* @ClassName FenQiHuanBenStrategy 
+* @date 2019年10月17日 下午1:51:55 
+* @author chify
+*/
+public class FenQiHuanBenStrategy implements Strategy {
+
+	@Override
+	public BigDecimal caculateInterest() {
+		System.out.println("分期还本计算利息");
+		return BigDecimal.ZERO;
+	}
+
+}

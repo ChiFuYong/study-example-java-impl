@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!--
+		1. 配置处理器映射器
+		   SpringMVC 默认处理器映射器：BeanNameUrlHandlerMapping
+		   根据 bean(自定义controller)的 name 属性 url 去匹配 handler(Action:Controller)
+	-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+	<!--
+       1. 处理器映射器：SimpleUrlHandlerMapping
+	-->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/test3">testHttpRequestHandlerAdapter</prop>
+				<prop key="/test4">testHttpRequestHandlerAdapter2</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!--
+		2. 配置处理器适配器
+		   SpringMVC 默认处理器适配器：SimpleControllerHandlerAdapter
+		   执行 Contrlloer 接口的实现类里的 handleRequest（）方法（自己实现的类）
+	-->
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+	<!--
+		2.处理器适配器：HttpRequestHandlerAdapter
+		  用法和写 Servlet 类似，不推荐使用这个
+	-->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean>
+
+	<!--
+		3. 配置自定义 Controoler ，需要实现 org.springframework.web.servlet.mvc.Controller 接口、
+		   对于的请求将会去执行 TestControoler 里的 handleRequest() 方法。
+	-->
+	<bean name="/test1" class="com.chifuyong.controller.a_xml.TestController"></bean>
+	<bean id="testHttpRequestHandlerAdapter" class="com.chifuyong.controller.a_xml.TestHttpRequestHandlerAdapter"></bean>
+	<!--
+		3. 配置 Adapter Bean
+		   对于的请求将会去执行 HttpRequestHandler 里的 handleRequest() 方法
+	-->
+	<bean id="testHttpRequestHandlerAdapter2" class="com.chifuyong.controller.a_xml.TestHttpRequestHandlerAdapter"></bean>
+	<bean name="/test2" class="com.chifuyong.controller.a_xml.TestController"></bean>
+
+
+    <!-- 4.视图解析器配置 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="prefix" value="/WEB-INF/views/"></property>
+    	<property name="suffix" value=".jsp"></property>
+    </bean>
+
+</beans>

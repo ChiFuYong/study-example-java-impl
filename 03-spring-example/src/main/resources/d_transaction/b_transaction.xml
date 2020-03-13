@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+   <!-- TransactionProxyFactoryBean 配置事务 -->
+   <!-- 1.数据源（dbcp）-->
+   <bean id="dataSource"  class="org.apache.commons.dbcp2.BasicDataSource">
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+      <property name="url" value="jdbc:mysql://localhost:3306/study"></property>
+      <property name="username" value="root"></property>
+      <property name="password" value="0607"></property>
+   </bean>
+   <!-- 2.Dao bean -->
+   <bean id="accountDao" class="com.chifuyong.d_transaction.dao.impl.AccountDaoImpl">
+      <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   <!-- 3.Service bean -->
+   <bean id="accountService" class="com.chifuyong.d_transaction.service.impl.AccountServiceImpl">
+      <property name="accountDao" ref="accountDao"></property>
+   </bean>
+   <!-- 4.事务管理器 -->
+   <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   <!-- 5.通过 FactoryBean 获取 service 代理对象 -->
+   <bean id="proxyAccountService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+      <!-- 接口 -->
+      <property name="proxyInterfaces" value="com.chifuyong.d_transaction.service.AccountService"></property>
+      <!-- 目标 -->
+      <property name="target" ref="accountService"></property>
+      <!-- 事务管理器 -->
+      <property name="transactionManager" ref="txManager"></property>
+      <!-- 事务属性
+            prop.key：  确定哪些方法使用当前配置
+            prop.text： 配置事务详情
+                  PROPAGATION    ISOLATION    readOnly    -Exception    +Exception
+                    传播行为        隔离级别      是否只读      异常回滚        异常提交
+      -->
+      <property name="transactionAttributes">
+         <props>
+            <prop key="transfer">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+         </props>
+      </property>
+   </bean>
+
+</beans>

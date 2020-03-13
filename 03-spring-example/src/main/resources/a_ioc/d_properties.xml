@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 1.构造方法注入 properties
+           name：参数名称
+           value：设置基本的普通数据
+           ref：设置引用型的数据
+           type：确定参数的类型
+           index：参数索引号，从 0 开始,假如只有索引，匹配到多个构造方法时，默认使用第一个
+    -->
+    <bean id="student" class="com.chifuyong.a_ioc.c_properties.Student">
+<!--        <constructor-arg index="0" value="光"/>-->
+<!--        <constructor-arg index="1" value="26"/>-->
+<!--        <constructor-arg index="2" value="男"/>-->
+        <constructor-arg name="name" value="光"/>
+        <constructor-arg name="age" value="26"/>
+        <constructor-arg name="sex" value="男"/>
+        <constructor-arg name="address" ref="homeAddr"/>
+    </bean>
+
+    <!-- 2.set方法注入 properties -->
+    <bean id="person" class="com.chifuyong.a_ioc.c_properties.Person">
+        <property name="name" value="光"></property>
+        <property name="age" value="26"></property>
+        <!-- 与上面等价 -->
+        <property name="sex">
+            <value>男</value>
+        </property>
+        <property name="homeAddr" ref="homeAddr"></property>
+        <!-- 与上面等价 -->
+        <property name="companyAddr">
+            <ref bean="companyAddr"></ref>
+        </property>
+    </bean>
+    <bean id="homeAddr" class="com.chifuyong.a_ioc.c_properties.Address">
+        <property name="addr" value="福建龙岩"></property>
+        <property name="phone" value="130××××××××"></property>
+    </bean>
+    <bean id="companyAddr" class="com.chifuyong.a_ioc.c_properties.Address">
+        <property name="addr" value="北京海淀"></property>
+        <property name="phone" value="8008208820"></property>
+    </bean>
+
+    <!-- 3. 集合注入 -->
+    <bean id="teacher" class="com.chifuyong.a_ioc.c_properties.Teacher">
+        <property name="arrayData">
+            <array>
+                <value>test1</value>
+                <value>test2</value>
+                <value>test3</value>
+            </array>
+        </property>
+        <property name="listData">
+            <list>
+                <value>list1</value>
+                <ref bean="student"></ref>
+            </list>
+        </property>
+        <property name="setData">
+            <set>
+                <value>set1</value>
+                <ref bean="student"></ref>
+            </set>
+        </property>
+        <property name="mapData">
+            <map>
+                <entry key="1" value="1"></entry>
+                <entry key="2" value-ref="student"></entry>
+            </map>
+        </property>
+        <property name="propertiesData">
+            <props>
+                <prop key="name">光</prop>
+                <prop key="age">26</prop>
+                <prop key="sex">男</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 4. p命名空间 -->
+    <bean id="person2" class="com.chifuyong.a_ioc.c_properties.Person"
+        p:name="光哥" p:age="26" p:sex="男" p:homeAddr-ref="homeAddr" p:companyAddr-ref="companyAddr">
+    </bean>
+
+    <!-- 5. spel 表达式
+            <property name="" value="#{表达式}">
+		        #{123}、#{'jack'} ： 数字、字符串
+		        #{beanId}	：另一个bean引用
+		        #{beanId.propName}	：操作数据
+		        #{beanId.toString()}	：执行方法
+		        #{T(类).字段|方法}	：静态方法或字段
+    -->
+    <bean id="person3" class="com.chifuyong.a_ioc.c_properties.Person">
+        <property name="name" value="#{'jack'}"></property>
+        <property name="age" value="#{14}"></property>
+        <property name="homeAddr" value="#{homeAddr}"></property>
+        <property name="companyAddr" value="#{companyAddr}"></property>
+    </bean>
+    <bean id="person4" class="com.chifuyong.a_ioc.c_properties.Person">
+        <property name="name" value="#{'tom'}"></property>
+        <property name="age" value="#{T(java.lang.Math).PI}"></property>
+        <property name="homeAddr" value="#{homeAddr}"></property>
+        <property name="companyAddr" value="#{companyAddr}"></property>
+    </bean>
+
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 1.静态工厂方式装配 Bean,返回 UserServiceImpl 对象-->
+    <bean id="staticFactory" class="com.chifuyong.a_ioc.b_factory.FactoryBean" factory-method="createService">
+        <!--这个是 Service Bean,因为静态工厂（FactoryBean）的 factory-method="createService"返回的就是一个 ServiceImpl 对象-->
+    </bean>
+
+    <!-- 2.实例工厂方式装配 Bean,返回 UserServiceImpl 对象-->
+    <bean id="factory" class="com.chifuyong.a_ioc.b_factory.FactoryBean">
+        <!--这就是FactoryBean,在 BeanFactory(ApplicationContext IOC容器)中也就是个 Bean,可以产生 Service 这个 Bean-->
+    </bean>
+    <bean id="intanceFactory" class="com.chifuyong.a_ioc.b_factory.FactoryBean" factory-bean="factory" factory-method="createService2"></bean>
+
+</beans>
