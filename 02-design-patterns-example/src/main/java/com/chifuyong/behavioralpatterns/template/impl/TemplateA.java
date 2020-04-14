@@ -4,8 +4,7 @@ import com.chifuyong.behavioralpatterns.template.api.TemplateAbs;
 
 /** 
 * 子类A
-* @ClassName TemplteA 
-* @date 2019年11月13日 下午2:47:36 
+* @date 2019年11月13日 下午2:47:36
 * @author chify
 */
 public class TemplateA extends TemplateAbs {

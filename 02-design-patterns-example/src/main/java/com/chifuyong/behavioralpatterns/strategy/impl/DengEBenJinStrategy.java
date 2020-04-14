@@ -1,13 +1,12 @@
 package com.chifuyong.behavioralpatterns.strategy.impl;
 
-import com.chifuyong.behavioralpatterns.strategy.interfac.Strategy;
+import com.chifuyong.behavioralpatterns.strategy.api.Strategy;
 
 import java.math.BigDecimal;
 
 /** 
 * 等额本金
-* @ClassName DengEBenJinStrategy 
-* @date 2019年10月17日 下午1:45:13 
+* @date 2019年10月17日 下午1:45:13
 * @author chify
 */
 public class DengEBenJinStrategy implements Strategy {

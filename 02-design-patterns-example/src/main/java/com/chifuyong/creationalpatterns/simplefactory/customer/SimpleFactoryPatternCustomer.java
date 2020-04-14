@@ -1,14 +1,13 @@
 package com.chifuyong.creationalpatterns.simplefactory.customer;
 
 import com.chifuyong.creationalpatterns.simplefactory.factory.OperationFactory;
-import com.chifuyong.creationalpatterns.simplefactory.interfac.Operation;
+import com.chifuyong.creationalpatterns.simplefactory.api.Operation;
 
 import java.util.Scanner;
 
 /** 
 * 简单工厂模式客户端测试类
-* @ClassName SimpleFactoryPatternCustomer 
-* @date 2019年10月8日 上午11:02:07 
+* @date 2019年10月8日 上午11:02:07
 * @author chify
 */
 public class SimpleFactoryPatternCustomer {
@@ -23,7 +22,9 @@ public class SimpleFactoryPatternCustomer {
 		String d2 = sc.nextLine();
 		//获取相应的云算类型对象
 		Operation operation = OperationFactory.getOperation(operationstr);
+		//运算
 		Double result = operation.getResult(Double.valueOf(d1), Double.valueOf(d2));
+		//结果
 		System.out.println("运算结果为："+result);
 		
 	}

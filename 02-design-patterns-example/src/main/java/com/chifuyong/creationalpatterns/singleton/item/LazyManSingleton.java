@@ -2,8 +2,7 @@ package com.chifuyong.creationalpatterns.singleton.item;
 
 /** 
 * 懒汉式单例类（会有线程并发问题，需要处理）
-* @ClassName SingletonClass 
-* @date 2019年11月13日 下午3:02:23 
+* @date 2019年11月13日 下午3:02:23
 * @author chify
 */
 public class LazyManSingleton{
@@ -14,17 +13,15 @@ public class LazyManSingleton{
 	
 	/** 
 	 * instance: 定义一个 LazyManSington 类型的成员变量
-	 * @since JDK 1.8
-	 */  
+	 */
 	public static LazyManSingleton instance;
 	
 	/** 
 	 * createInstance: 静态方法获取单例对象 <br/>  
-	 * @author chify
-	 * @return 
-	 * @since JDK 1.8
+	 * @return
 	 */
 	public static synchronized LazyManSingleton createInstance(){
+		//使用 synchronized 防止多线程调用下，出现多实例，保证线程安全
 		if(instance == null) {
 			instance = new LazyManSingleton();
 		}

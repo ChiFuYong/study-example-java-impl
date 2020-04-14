@@ -3,6 +3,12 @@ package com.chifuyong.creationalpatterns.singleton.customer;
 import com.chifuyong.creationalpatterns.singleton.item.HungerManSingleton;
 import com.chifuyong.creationalpatterns.singleton.item.LazyManSingleton;
 
+/**
+ * 客户端测试类
+ *
+ * @Date: 2020/4/14
+ * @author: chify
+ */
 public class TestSingleton {
 	
 	public static void main(String[] args) {

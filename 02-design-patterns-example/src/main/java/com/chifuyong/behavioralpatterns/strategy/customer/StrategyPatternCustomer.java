@@ -5,6 +5,12 @@ import com.chifuyong.behavioralpatterns.strategy.context.combinesimplefactory.Ca
 import com.chifuyong.behavioralpatterns.strategy.context.enums.RepayMethod;
 import com.chifuyong.behavioralpatterns.strategy.impl.*;
 
+/**
+ * 客户端测试类
+ *
+ * @Date: 2020/4/14
+ * @author: chify
+ */
 public class StrategyPatternCustomer {
 	
 	public static void main(String[] args) {
@@ -27,17 +33,10 @@ public class StrategyPatternCustomer {
 		System.out.println();
 		
 		//结合简单工厂使用策略模式
-		CaculateAmountCombineSimpleFactoryContext factroyContext1 = new CaculateAmountCombineSimpleFactoryContext(RepayMethod.OT.getDesc());
+		// 假设这里的 RepayMethod 是数据库里查到的不同的值，这样 Context 就让 Strategy 和客户端调用类解耦合了
+		CaculateAmountCombineSimpleFactoryContext factroyContext1 =
+				new CaculateAmountCombineSimpleFactoryContext(RepayMethod.PI);
 		factroyContext1.calculateInterest();
-		CaculateAmountCombineSimpleFactoryContext factroyContext2 = new CaculateAmountCombineSimpleFactoryContext(RepayMethod.EP.getDesc());
-		factroyContext2.calculateInterest();
-		CaculateAmountCombineSimpleFactoryContext factroyContext3 = new CaculateAmountCombineSimpleFactoryContext(RepayMethod.EI.getDesc());
-		factroyContext3.calculateInterest();
-		CaculateAmountCombineSimpleFactoryContext factroyContext4 = new CaculateAmountCombineSimpleFactoryContext(RepayMethod.WL.getDesc());
-		factroyContext4.calculateInterest();
-		CaculateAmountCombineSimpleFactoryContext factroyContext5 = new CaculateAmountCombineSimpleFactoryContext(RepayMethod.SG.getDesc());
-		factroyContext5.calculateInterest();
-		CaculateAmountCombineSimpleFactoryContext factroyContext6 = new CaculateAmountCombineSimpleFactoryContext(RepayMethod.PI.getDesc());
-		factroyContext6.calculateInterest();
+
 	}
 }

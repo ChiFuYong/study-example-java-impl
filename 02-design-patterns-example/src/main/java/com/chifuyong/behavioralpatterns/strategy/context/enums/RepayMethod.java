@@ -1,5 +1,11 @@
 package com.chifuyong.behavioralpatterns.strategy.context.enums;
 
+/**
+ * 还款方式枚举
+ *
+ * @Date: 2020/4/14
+ * @author: chify
+ */
 public enum RepayMethod {
 	/** 
 	 * EI: 等额本息

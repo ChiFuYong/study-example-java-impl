@@ -1,11 +1,10 @@
 package com.chifuyong.creationalpatterns.simplefactory.impl;
 
-import com.chifuyong.creationalpatterns.simplefactory.interfac.Operation;
+import com.chifuyong.creationalpatterns.simplefactory.api.Operation;
 
 /** 
 * 加法运算实现类
-* @ClassName AddOperation 
-* @date 2019年10月8日 上午11:00:11 
+* @date 2019年10月8日 上午11:00:11
 * @author chify
 */
 public class AddOperation implements Operation {

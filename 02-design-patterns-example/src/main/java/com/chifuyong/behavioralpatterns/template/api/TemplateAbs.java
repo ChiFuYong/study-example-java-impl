@@ -2,8 +2,7 @@ package com.chifuyong.behavioralpatterns.template.api;
 
 /** 
 * 模版方法抽象类
-* @ClassName TemplateInterface 
-* @date 2019年11月13日 下午2:44:00 
+* @date 2019年11月13日 下午2:44:00
 * @author chify
 */
 public abstract class TemplateAbs {
