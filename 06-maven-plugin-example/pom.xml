@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>study-example-java-impl</artifactId>
+        <groupId>com.chifuyong</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>06-maven-plugin-example</artifactId>
+
+    <dependencies>
+        <!-- MySQL数据库驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.13</version>
+        </dependency>
+        <!-- druid数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+        <!-- 测试 provided ，打包不会被打进去 。-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <version>9.0.12</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven 打可执行 jar包 配置-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- 指定启动主类（Main-Class）-->
+                            <mainClass>com.com.chifuyong.TestDemo</mainClass>
+                            <!-- 在 MANIFEST.MF 加上Class-Path项并配置依赖包 -->
+                            <addClasspath>true</addClasspath>
+                            <!-- 指定依赖包所在目录 -->
+                            <classpathPrefix>dependencies/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- 可执行jar 相关依赖目录存放配置 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- 依赖的jar包输出目录 -->
+                            <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+                            <!-- 排除 provide 范围-->
+                            <excludeScope>provided</excludeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- maven-assembly-plugin 打包配置 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <!-- 在 package 阶段执行 assembly:single -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 在 package 阶段执行 assembly:single -->
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <!-- 打包后的文件名会以 finalName-id (id 为 descriptor xml 的 id ) -->
+                            <finalName>${project.artifactId}</finalName>
+                            <descriptors>
+                                <!-- 描述文件(里面定义了如何打包)路径 -->
+                                <descriptor>assemblies/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -15,7 +15,7 @@
         <module>03-spring-example</module>
         <module>04-springmvc-example</module>
         <module>05-redis-example</module>
+        <module>06-maven-plugin-example</module>
     </modules>
-
 
 </project>

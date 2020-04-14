@@ -20,7 +20,7 @@ public class ArrayListImpl<T> implements List<T> {
 	 * arrays: 元素数组
 	 * @since JDK 1.8
 	 */  
-	private T arrays[];
+	private T[] arrays;
 	
 	/** 
 	 * length: 元素个数

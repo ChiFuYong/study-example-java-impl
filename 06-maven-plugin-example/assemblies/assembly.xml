@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+
+    <id>${project.version}</id>
+
+    <formats>
+        <!--打包的类型-->
+        <format>tar.gz</format>
+    </formats>
+
+    <!-- 打包后直接在打包文件做根路径 -->
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <!-- 打包单个文件 -->
+    <files>
+        <file>
+            <source>${project.basedir}/src/main/resources/Test.txt</source>
+            <outputDirectory>/</outputDirectory>
+            <!-- 可以修改打包后文件的名称-->
+            <destName>Test.txt.new</destName>
+        </file>
+    </files>
+
+    <!--打包文件集-->
+    <fileSets>
+        <fileSet>
+            <!-- 文件目录 -->
+            <directory>${project.basedir}/src/main/resources/bin</directory>
+            <!-- 目标目录 -->
+            <outputDirectory>/</outputDirectory>
+            <!--排除某个目录下某类文件-->
+            <!--<excludes>
+                <exclude>**/*.txt</exclude>
+            </excludes>-->
+            <!--某个目录下只想包含某些文件-->
+            <!--<includes>
+                <include>**/*.class</include>
+            </includes>-->
+        </fileSet>
+        <!-- maven-dependency-plugin 导出的工程依赖 jar 包打到/lib -->
+        <fileSet>
+            <directory>${project.build.directory}/dependencies</directory>
+            <outputDirectory>/lib</outputDirectory>
+        </fileSet>
+        <!-- configs文件打包 -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/configs</directory>
+            <outputDirectory>/conf</outputDirectory>
+            <includes>
+                <include>*.xml</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <!--打包依赖库-->
+    <dependencySets>
+<!--        <dependencySet>-->
+            <!-- 依赖所属目录 -->
+<!--            <outputDirectory>/lib</outputDirectory>-->
+            <!--是否把包解开，默认为 false-->
+<!--            <unpack>false</unpack>-->
+            <!-- 排除自身 -->
+<!--            <useProjectArtifact>false</useProjectArtifact>-->
+            <!-- 传递依赖 -->
+<!--            <useTransitiveFiltering>true</useTransitiveFiltering>-->
+<!--        </dependencySet>-->
+        <!-- 自身打包到 / 根目录 -->
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>com.chifuyong:06-maven-plugin-example</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>
