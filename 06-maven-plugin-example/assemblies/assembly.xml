@@ -39,10 +39,10 @@
                 <include>**/*.class</include>
             </includes>-->
         </fileSet>
-        <!-- maven-dependency-plugin 导出的工程依赖 jar 包打到/lib -->
+        <!-- 可以把 maven-dependency-plugin 导出的工程依赖 jar 包打到/dependencies -->
         <fileSet>
             <directory>${project.build.directory}/dependencies</directory>
-            <outputDirectory>/lib</outputDirectory>
+            <outputDirectory>/dependencies</outputDirectory>
         </fileSet>
         <!-- configs文件打包 -->
         <fileSet>
@@ -56,16 +56,16 @@
 
     <!--打包依赖库-->
     <dependencySets>
-<!--        <dependencySet>-->
+        <dependencySet>
             <!-- 依赖所属目录 -->
-<!--            <outputDirectory>/lib</outputDirectory>-->
+            <outputDirectory>/lib</outputDirectory>
             <!--是否把包解开，默认为 false-->
-<!--            <unpack>false</unpack>-->
+            <unpack>false</unpack>
             <!-- 排除自身 -->
-<!--            <useProjectArtifact>false</useProjectArtifact>-->
+            <useProjectArtifact>false</useProjectArtifact>
             <!-- 传递依赖 -->
 <!--            <useTransitiveFiltering>true</useTransitiveFiltering>-->
-<!--        </dependencySet>-->
+        </dependencySet>
         <!-- 自身打包到 / 根目录 -->
         <dependencySet>
             <outputDirectory>/</outputDirectory>

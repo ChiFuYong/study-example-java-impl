@@ -13,13 +13,19 @@
     <artifactId>06-maven-plugin-example</artifactId>
 
     <dependencies>
+        <!-- SpringMVC 依赖-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.2.0.RELEASE</version>
+        </dependency>
         <!-- MySQL数据库驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.13</version>
         </dependency>
-        <!-- druid数据库连接池 -->
+        <!-- druid数据库连接池 ，里面依赖了jdk里的jar包-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -67,7 +73,10 @@
                             <!-- 依赖的jar包输出目录 -->
                             <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
                             <!-- 排除 provide 范围-->
-                            <excludeScope>provided</excludeScope>
+<!--                            <excludeScope>provided</excludeScope>-->
+                            <!-- 只包含 runtime -->
+                            <includeScope>runtime</includeScope>
+                            <useBaseVersion>true</useBaseVersion>
                         </configuration>
                     </execution>
                 </executions>
