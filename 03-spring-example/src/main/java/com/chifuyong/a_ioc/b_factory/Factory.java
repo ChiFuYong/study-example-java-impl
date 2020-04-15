@@ -8,7 +8,7 @@ import com.chifuyong.a_ioc.ServiceImpl;
  * @Date: 28/02/2020 14:40
  * @Description:
  */
-public class FactoryBean {
+public class Factory {
 
     /*
     * 静态工厂方式装配 Bean
