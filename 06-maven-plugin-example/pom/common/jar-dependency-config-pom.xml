@@ -38,56 +38,50 @@
             <version>9.0.12</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- 注：添加此依赖，是为了方便在 assembly 所依赖的 jar 包中
-            找到 bin、jar-with-dependencies、project、src.xml 四个内置的 descriptor 打包方式-->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-            <!-- maven-assembly-plugin 自定义打包貌似无法打可执行 Jar，这里用 maven-jar-plugin 来打可执行jar包-->
+            <!-- Maven 打可执行 jar包 配置-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
+                            <!--这个属性特别关键，如果没有这个属性，有时候我们引用的包maven库
+                               下面可能会有多个包，并且只有一个是正确的，其余的可能是带时间戳的，
+                               此时会在classpath下面把那个带时间戳的给添加上去，然后我们
+                               在依赖打包的时候，打的是正确的，所以两头会对不上，报错。-->
                             <useUniqueVersions>false</useUniqueVersions>
+                            <!-- 指定启动主类（Main-Class）-->
                             <mainClass>com.chifuyong.TestDemo</mainClass>
+                            <!-- 在 MANIFEST.MF 加上 Class-Path 项并配置依赖包 -->
                             <addClasspath>true</addClasspath>
+                            <!-- 指定依赖包所在目录 -->
                             <classpathPrefix>dependencies/</classpathPrefix>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
-            <!-- maven-assembly-plugin 打包配置，使用自定义文件描述来打包 -->
+            <!-- 可执行jar 相关依赖目录存放配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.2.0</version>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>assembly-test</id>
-                        <!-- 在 package 阶段执行 assembly:single -->
                         <phase>package</phase>
                         <goals>
-                            <!-- 在 package 阶段执行 assembly:single -->
-                            <goal>single</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <!-- 打包后的文件名会以 finalName-id (id 为 descriptor xml 的 id ) -->
-                            <finalName>${project.artifactId}</finalName>
-                            <descriptors>
-                                <!-- 自定义描述文件(里面定义了如何打包)的路径 -->
-                                <descriptor>assemblies/assembly.xml</descriptor>
-                            </descriptors>
+                            <!-- 依赖的jar包输出目录 -->
+                            <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+                            <!-- 排除 provide 范围-->
+<!--                            <excludeScope>provided</excludeScope>-->
+                            <!-- 只包含 runtime -->
+                            <includeScope>runtime</includeScope>
+                            <useBaseVersion>true</useBaseVersion>
                         </configuration>
                     </execution>
                 </executions>

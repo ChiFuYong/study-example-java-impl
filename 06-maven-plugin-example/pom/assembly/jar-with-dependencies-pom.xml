@@ -52,43 +52,28 @@
 
     <build>
         <plugins>
-            <!-- maven-assembly-plugin 自定义打包貌似无法打可执行 Jar，这里用 maven-jar-plugin 来打可执行jar包-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>com.chifuyong.TestDemo</mainClass>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>dependencies/</classpathPrefix>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <!-- maven-assembly-plugin 打包配置，使用自定义文件描述来打包 -->
+            <!-- maven-assembly-plugin 打包配置:jar-with-dependencies -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.2.0</version>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.chifuyong.TestDemo</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>assembly-test</id>
-                        <!-- 在 package 阶段执行 assembly:single -->
                         <phase>package</phase>
                         <goals>
-                            <!-- 在 package 阶段执行 assembly:single -->
                             <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <!-- 打包后的文件名会以 finalName-id (id 为 descriptor xml 的 id ) -->
-                            <finalName>${project.artifactId}</finalName>
-                            <descriptors>
-                                <!-- 自定义描述文件(里面定义了如何打包)的路径 -->
-                                <descriptor>assemblies/assembly.xml</descriptor>
-                            </descriptors>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
