@@ -2,11 +2,12 @@
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <!-- maven-assembly-plugin 自定义打包配置-->
 
     <id>${project.version}</id>
 
     <formats>
-        <!--打包的类型-->
+        <!--打包的类型：zip、jar、tar、tar.gz、tar.bz2、war、dir-->
         <format>tar.gz</format>
     </formats>
 
@@ -41,11 +42,11 @@
                 <include>**/*.class</include>
             </includes>-->
         </fileSet>
-        <!-- 可以把 maven-dependency-plugin 导出的工程依赖 jar 包打到/dependencies -->
-        <fileSet>
+        <!-- 需要的话也可以把 maven-dependency-plugin 导出的工程依赖 jar 包打到/dependencies -->
+        <!--<fileSet>
             <directory>${project.build.directory}/dependencies</directory>
             <outputDirectory>/dependencies</outputDirectory>
-        </fileSet>
+        </fileSet>-->
         <!-- configs文件打包 -->
         <fileSet>
             <directory>${project.basedir}/src/main/resources/configs</directory>
@@ -65,16 +66,16 @@
             <unpack>false</unpack>
             <!-- 排除自身 -->
             <useProjectArtifact>false</useProjectArtifact>
-            <!-- 传递依赖 -->
-<!--            <useTransitiveFiltering>true</useTransitiveFiltering>-->
+            <!-- scope 范围-->
+            <scope>runtime</scope>
         </dependencySet>
         <!-- 自身打包到根目录 -->
-        <dependencySet>
+        <!--<dependencySet>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>${project.groupId}:${project.artifactId}</include>
             </includes>
-        </dependencySet>
+        </dependencySet>-->
     </dependencySets>
 
 </assembly>
