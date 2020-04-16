@@ -10,16 +10,18 @@
         <format>tar.gz</format>
     </formats>
 
-    <!-- 打包后直接在打包文件做根路径 -->
-    <includeBaseDirectory>false</includeBaseDirectory>
+    <!-- 打包后有无根路径目录,这边为true,
+         根路径目录为 pom 文件中的<finalName>${project.artifactId}</finalName> -->
+    <includeBaseDirectory>true</includeBaseDirectory>
 
     <!-- 打包单个文件 -->
     <files>
         <file>
-            <source>${project.basedir}/src/main/resources/Test.txt</source>
+            <!-- 把项目 jar 打包进去，并改名 -->
+            <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
             <outputDirectory>/</outputDirectory>
             <!-- 可以修改打包后文件的名称-->
-            <destName>Test.txt.new</destName>
+            <destName>maven-plugin-example.jar</destName>
         </file>
     </files>
 
@@ -66,11 +68,11 @@
             <!-- 传递依赖 -->
 <!--            <useTransitiveFiltering>true</useTransitiveFiltering>-->
         </dependencySet>
-        <!-- 自身打包到 / 根目录 -->
+        <!-- 自身打包到根目录 -->
         <dependencySet>
             <outputDirectory>/</outputDirectory>
             <includes>
-                <include>com.chifuyong:06-maven-plugin-example</include>
+                <include>${project.groupId}:${project.artifactId}</include>
             </includes>
         </dependencySet>
     </dependencySets>
