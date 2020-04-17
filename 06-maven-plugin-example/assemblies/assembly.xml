@@ -47,9 +47,10 @@
             <directory>${project.build.directory}/dependencies</directory>
             <outputDirectory>/dependencies</outputDirectory>
         </fileSet>-->
-        <!-- configs文件打包 -->
+        <!-- config文件打包 -->
         <fileSet>
-            <directory>${project.basedir}/src/main/resources/configs</directory>
+            <!-- ${profile.env} 为自定义的 profile -->
+            <directory>${project.basedir}/src/main/resources/config/${profile.env}</directory>
             <outputDirectory>/conf</outputDirectory>
             <includes>
                 <include>*.xml</include>

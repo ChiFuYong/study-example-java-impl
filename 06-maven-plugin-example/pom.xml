@@ -50,6 +50,32 @@
 
     </dependencies>
 
+    <profiles>
+        <!-- 配置 profiles -->
+        <profile>
+            <id>sit</id>
+            <properties>
+                <profile.env>sit</profile.env>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <profile.env>uat</profile.env>
+            </properties>
+            <activation>
+                <!-- 激活 uat -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>pro</id>
+            <properties>
+                <profile.env>pro</profile.env>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <!-- maven-assembly-plugin 自定义打包貌似无法打可执行 Jar，这里用 maven-jar-plugin 来打可执行jar包-->
