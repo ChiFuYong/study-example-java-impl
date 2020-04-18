@@ -49,15 +49,14 @@
                 <configuration>
                     <!--只包含该项目代码中用到的jar,在父项目中引入了，但在当前模块中没有用到就会被删掉-->
                     <minimizeJar>true</minimizeJar>
-                    <!--重新定位类位置，就好像类是自己写的一样，修改别人jar包的package-->
+                    <!-- 把依赖的 Jar 包里的类路径改掉，到时候工程里类引用到这里的 jar 包 import 类也会被改掉（相当于这个jar包是自己写的）-->
                     <relocations>
                         <relocation>
-                            <pattern>com.alibaba.fastjson</pattern>
-                            <shadedPattern>com.gavinzh.learn.fastjson</shadedPattern>
+                            <pattern>com.alibaba.druid</pattern>
+                            <shadedPattern>com.chifuyong.druid</shadedPattern>
                             <excludes>
-                                <!--这些类和包不会被改变-->
-                                <exclude>com.alibaba.fastjson.not.Exists</exclude>
-                                <exclude>com.alibaba.fastjson.not.exists.*</exclude>
+                                <!-- 排除某个类 -->
+                                <exclude>com.alibaba.druid.Constants</exclude>
                             </excludes>
                         </relocation>
                     </relocations>
@@ -69,17 +68,17 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <!--创建一个你自己的标识符，位置在原有名称之后-->
+                            <!--在原有 jar 名后添加一个 shade 打包的标识和原本的 jar 做区分-->
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>test</shadedClassifierName>
                             <!--在打包过程中对文件做一些处理工作-->
                             <transformers>
-                                <!--在META-INF/MANIFEST.MF文件中添加key: value 可以设置Main方法-->
+                                <!-- 改动 MANIFEST.MF信息，可设置入口类方法-->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
                                         <mainClass>com.chifuyong.TestDemo</mainClass>
-                                        <Build-Number>123</Build-Number>
+                                        <Build-Number>3545</Build-Number>
                                         <Built-By>guan</Built-By>
                                         <X-Compile-Source-JDK>1.8</X-Compile-Source-JDK>
                                         <X-Compile-Target-JDK>1.8</X-Compile-Target-JDK>
