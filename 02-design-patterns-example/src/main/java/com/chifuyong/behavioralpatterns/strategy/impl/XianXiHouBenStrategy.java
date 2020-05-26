@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 */
 public class XianXiHouBenStrategy implements Strategy {
 
+	@Override
 	public BigDecimal caculateInterest() {
 		System.out.println("先息后本计算利息");
 		return BigDecimal.ZERO;
