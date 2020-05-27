@@ -6,10 +6,11 @@
     <!-- Bean 的生命周期 -->
     <bean id="service" class="com.chifuyong.a_ioc.ServiceImpl" init-method="init" destroy-method="destory"></bean>
 
+    <!-- 没有 init-method 和 destroy-method 方法-->
     <bean id="service2" class="com.chifuyong.a_ioc.ServiceImpl"></bean>
 
     <!-- 后处理 bean 配置,在 bean 初始化之后可以修改 bean
-         对所有配置过的 bean 都生效,想要只作用一个，使用 参数2：beanName 来过滤
+         对所有配置过的 bean 都生效,想要只作用一个，在 TestBeanPostProcessor 类方法中使用 参数2：beanName 来过滤
     -->
     <bean class="com.chifuyong.a_ioc.TestBeanPostProcessor"></bean>
 

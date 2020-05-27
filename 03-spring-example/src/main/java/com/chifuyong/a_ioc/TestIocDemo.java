@@ -61,14 +61,15 @@ public class TestIocDemo {
     }
 
     /*
-    * 生命周期
+    * BeanPostProcesser 示例
     * */
     @Test
-    public void lifeCycle(){
-        String xmlPath = "a_ioc/c_lifecycle.xml";
+    public void beanPostProcesser(){
+        String xmlPath = "a_ioc/c_beanpostprocessor.xml";
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);
         Service Service = (Service) applicationContext.getBean("service",Service.class);
         Service.helloWorld();
+        //关闭容器后，bean 会调用 destroy-method 方法
         applicationContext.close();
     }
 

@@ -14,15 +14,21 @@ import java.lang.reflect.Proxy;
  */
 public class TestBeanPostProcessor implements BeanPostProcessor {
 
+    /**
+     * init-method 方法之前执行
+     */
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("初始化前（TestBeanPostProcessor）...."+beanName);
         return bean;
     }
 
+    /**
+     * init-method 方法之后执行
+     */
     public Object postProcessAfterInitialization(final Object bean, String beanName) throws BeansException {
         System.out.println("初始化后（TestBeanPostProcessor）...."+beanName);
-        //动态代理
-        return Proxy.newProxyInstance(
+        //动态代理,返回的对象不再是 spring new 的那个对象
+        Object object = Proxy.newProxyInstance(
                 TestBeanPostProcessor.class.getClassLoader(),
                 bean.getClass().getInterfaces(),
                 new InvocationHandler() {
@@ -33,5 +39,6 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
                         return null;
                     }
                 });
+        return object;
     }
 }

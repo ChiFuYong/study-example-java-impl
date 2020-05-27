@@ -7,6 +7,10 @@ package com.chifuyong.a_ioc;
  */
 public class ServiceImpl implements Service {
 
+    public ServiceImpl() {
+        System.out.println("ServiceImpl 构造方法。。。");
+    }
+
     public void helloWorld() {
         System.out.println("Hello World!!!");
     }
@@ -19,12 +23,19 @@ public class ServiceImpl implements Service {
         System.out.println("InstanceFactory Success !");
     }
 
+    /**
+     * BeanPostProcessor 类对象的 before 方法之后执行，after 方法之后执行
+     * （配置文件中配的 init-method）
+     */
     public void init(){
-        System.out.println("Service Bean 初始化。。。");
+        System.out.println("Service Bean 初始化方法（init-method）。。。");
     }
 
+    /**
+     * Spring 容器 close() 之后会调用（配置文件中配的 destroy-method）
+     */
     public void destory(){
-        System.out.println("Service Bean 销毁。。。");
+        System.out.println("Service Bean 销毁方法(destroy-method)。。。");
     }
 
 }
