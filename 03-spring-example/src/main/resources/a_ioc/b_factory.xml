@@ -14,4 +14,9 @@
     </bean>
     <bean id="intanceFactory" class="com.chifuyong.a_ioc.b_factory.Factory" factory-bean="factory" factory-method="createService2"></bean>
 
+    <!-- 3. FactoryBean 测试-->
+    <bean id="env" class="com.chifuyong.a_ioc.b_factory.TestFactoryBean">
+        <property name="name" value="testValue"></property>
+    </bean>
+
 </beans>

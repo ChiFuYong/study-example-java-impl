@@ -1,13 +1,14 @@
 package com.chifuyong.a_ioc;
 
-import com.chifuyong.a_ioc.d_annotation.DemoController;
 import com.chifuyong.a_ioc.a_di.UserService;
 import com.chifuyong.a_ioc.c_properties.Person;
 import com.chifuyong.a_ioc.c_properties.Student;
 import com.chifuyong.a_ioc.c_properties.Teacher;
+import com.chifuyong.a_ioc.d_annotation.DemoController;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import java.util.Properties;
 
 /**
  * @Auther: chify
@@ -59,6 +60,22 @@ public class TestIocDemo {
         Service Service = (Service) applicationContext.getBean("intanceFactory",Service.class);
         Service.instanceFactory();
     }
+
+    /**
+     * 测试 FactoryBean
+     */
+    @Test
+    public void test5(){
+        String xmlPath = "a_ioc/b_factory.xml";
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);
+        Properties properties = System.getProperties();
+        Properties properties1 = applicationContext.getBean("env", Properties.class);
+        Properties properties2 = applicationContext.getBean("env", Properties.class);
+        System.out.println(properties == properties1);
+        //判断是否为单例
+        System.out.println(properties1 == properties2);
+    }
+
 
     /*
     * BeanPostProcesser 示例
