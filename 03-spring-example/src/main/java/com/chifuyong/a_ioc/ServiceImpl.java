@@ -7,6 +7,16 @@ package com.chifuyong.a_ioc;
  */
 public class ServiceImpl implements Service {
 
+    private String testEnv;
+
+    public void setTestEnv(String testEnv) {
+        this.testEnv = testEnv;
+    }
+
+    public String getTestEnv() {
+        return testEnv;
+    }
+
     public ServiceImpl() {
         System.out.println("ServiceImpl 构造方法。。。");
     }

@@ -12,11 +12,18 @@
     <bean id="factory" class="com.chifuyong.a_ioc.b_factory.Factory">
         <!--这就是 FactoryBean,在 BeanFactory(ApplicationContext IOC容器)中也就是个 Bean,可以产生 Service 这个 Bean-->
     </bean>
-    <bean id="intanceFactory" class="com.chifuyong.a_ioc.b_factory.Factory" factory-bean="factory" factory-method="createService2"></bean>
+    <bean id="intanc eFactory" class="com.chifuyong.a_ioc.b_factory.Factory" factory-bean="factory" factory-method="createService2"></bean>
 
     <!-- 3. FactoryBean 测试-->
     <bean id="env" class="com.chifuyong.a_ioc.b_factory.TestFactoryBean">
-        <property name="name" value="testValue"></property>
+        <!-- Spel 里的 systemProperties 就是 System.getProperties() 拿到的对象(java VM options -D参数传进去) -->
+        <property name="systemProperties" value="#{systemProperties['test.SystemProperties'] ?: 'test.SystemProperties.Value'}"></property>
+        <property name="systemEnvironment" value="#{systemEnvironment['test.SystemEnvironment'] ?: 'test.SystemEnvironment.Value'}"></property>
+    </bean>
+
+    <!-- 4. 测试 3步骤中 env (通过 FactoryBean 拿到的 properties) 效果  -->
+    <bean id="testEnvBean" class="com.chifuyong.a_ioc.ServiceImpl">
+        <property name="testEnv" value="#{env['test.SystemEnvironment'] ?: 'defaultEnv'}"></property>
     </bean>
 
 </beans>

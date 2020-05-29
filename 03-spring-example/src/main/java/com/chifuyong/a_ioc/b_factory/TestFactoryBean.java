@@ -12,10 +12,16 @@ import java.util.Properties;
  */
 public class TestFactoryBean implements FactoryBean<Properties> {
 
-    private String name;
+    private String systemProperties;
 
-    public void setName(String name) {
-        this.name = name;
+    private String systemEnvironment;
+
+    public void setSystemEnvironment(String systemEnvironment) {
+        this.systemEnvironment = systemEnvironment;
+    }
+
+    public void setSystemProperties(String systemProperties) {
+        this.systemProperties = systemProperties;
     }
 
     /**
@@ -27,7 +33,8 @@ public class TestFactoryBean implements FactoryBean<Properties> {
         Properties properties = System.getProperties();
         Properties properties1 = new Properties();
         properties1.putAll(properties);
-        properties1.put("testKey",name);
+        properties1.put("test.SystemProperties",systemProperties);
+        properties1.put("test.SystemEnvironment",systemEnvironment);
         return properties1;
     }
 

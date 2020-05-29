@@ -74,6 +74,9 @@ public class TestIocDemo {
         System.out.println(properties == properties1);
         //判断是否为单例
         System.out.println(properties1 == properties2);
+        // 测试 env 注入的效果，详细看配置文件
+        ServiceImpl service = applicationContext.getBean("testEnvBean",ServiceImpl.class);
+        System.out.println("service. = " + service.getTestEnv());
     }
 
 
