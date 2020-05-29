@@ -18,6 +18,7 @@
         <module>05-redis-example</module>
         <module>06-maven-plugin-example</module>
         <module>07-concurrency-practice-example</module>
+        <module>08-rabbitmq-example</module>
     </modules>
 
 </project>
