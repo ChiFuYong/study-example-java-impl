@@ -72,7 +72,7 @@ public class ClassLoaderDemo {
         String str1 = MyClassLoader.class.getResource("/").toString();
         str1 = str1.replace("file:/","");
         str1 = str1.replace("/00-common-study-example/target/classes/","");
-        str1 = str1 + "/classloader/hello/";
+        str1 = str1 + "/classloader/";
         // str1 = /D:/idea-project-root/ChiFuYong/study-example-java-impl/classloader/hello/
         System.out.println("class 文件所在路径 = " + str1);
 
@@ -80,7 +80,7 @@ public class ClassLoaderDemo {
         // HelloWorld 类详见 study-example-java-impl\classloader\hello
         // hello 是 HelloWorld 所在的包
         Class clazz = myClassLoader.loadClass("hello.HelloWorld");
-        //clzz.ClassLoader = sun.misc.Launcher$AppClassLoader@18b4aac2
+        //clazz.ClassLoader = com.chifuyong.classloader.MyClassLoader@7d907bac
         System.out.println("clazz.ClassLoader = " + clazz.getClassLoader());
         //通过反射执行方法
         Method method = clazz.getDeclaredMethod("sayHello");

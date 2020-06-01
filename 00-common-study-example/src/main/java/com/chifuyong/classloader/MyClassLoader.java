@@ -36,9 +36,8 @@ public class MyClassLoader extends ClassLoader{
 
     private byte[] loadClassSource(String name) throws IOException {
         //拼接 class 文件所在目录
-        String [] str1 = name.split("\\.");
-        name = str1[str1.length-1];
-        String fileName = classPath + name + ".class";
+        name = name.replaceAll("\\.","/") + ".class";
+        String fileName = classPath + name;
 
         InputStream is = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
