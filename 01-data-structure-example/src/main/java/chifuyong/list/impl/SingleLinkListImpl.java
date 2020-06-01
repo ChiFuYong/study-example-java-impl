@@ -2,15 +2,17 @@ package chifuyong.list.impl;
 
 import chifuyong.list.List;
 
-/** 
-* 单链表实现类
-* @ClassName SingleLinkListImpl
-* @date 2019年9月30日 下午4:21:53 
-* @author chify
-*/
+/**
+ * 单链表实现类
+ *
+ * @Date: 2020/6/1
+ * @author: chify
+ */
 public class SingleLinkListImpl<T> implements List<T> {
-	
-	//节点类
+
+	/**
+	 * 节点类
+	 */
 	private class Node<T>{
 		
 		private T data;//数据域
@@ -20,14 +22,12 @@ public class SingleLinkListImpl<T> implements List<T> {
 	
 	/** 
 	 * head: 头结点
-	 * @since JDK 1.8
-	 */  
+	 */
 	private Node head;
 	
 	/** 
 	 * length: 长度
-	 * @since JDK 1.8
-	 */  
+	 */
 	private int length;
 
 	@Override
@@ -35,10 +35,10 @@ public class SingleLinkListImpl<T> implements List<T> {
 		return length;
 	}
 
+	/**
+	 * 头插法
+	 */
 	@Override
-	/*
-	* 头插法
-	* */
 	public int insert(T element) {
 		Node newNode = new Node<T>();
 		newNode.data = element;
@@ -56,9 +56,9 @@ public class SingleLinkListImpl<T> implements List<T> {
 		return 1;
 	}
 
-	/*
-	* 尾插法法
-	* */
+	/**
+	 * 尾插法
+	 */
 	public int insert2(T element) {
 		Node newNode = new Node<T>();
 		newNode.data = element;
@@ -81,10 +81,12 @@ public class SingleLinkListImpl<T> implements List<T> {
 
 	@Override
 	public int delete(int location) {
-		if (location <0 )
+		if (location <0 ) {
 			throw new RuntimeException("给定位置不能为负数！");
-		if(this.length<location)
+		}
+		if(this.length<location) {
 			throw new RuntimeException("给定位置超出链表长度！");
+		}
 		Node temp = head.next;
 		for (int i = 0;i < location-2;i++){//循环取到要删除的前一个元素
 			temp = temp.next;
@@ -97,10 +99,12 @@ public class SingleLinkListImpl<T> implements List<T> {
 
 	@Override
 	public int modify(T element, int location) {
-		if (location <0 )
+		if (location <0 ) {
 			throw new RuntimeException("给定位置不能为负数！");
-		if(this.length<location)
+		}
+		if(this.length<location) {
 			throw new RuntimeException("给定位置超出链表长度！");
+		}
 		Node temp = head.next;
 		for(int i =0; i < location-1;i++){
 			//取到要修改的节点
@@ -112,10 +116,12 @@ public class SingleLinkListImpl<T> implements List<T> {
 
 	@Override
 	public T getElement(int location) {
-		if (location <0 )
+		if (location <0 ) {
 			throw new RuntimeException("给定位置不能为负数！");
-		if(this.length<location)
+		}
+		if(this.length<location) {
 			throw new RuntimeException("给定位置超出链表长度！");
+		}
 		Node temp = head.next;
 		for(int i =0; i < location-1;i++){
 			//取到给定位置的节点
