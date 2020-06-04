@@ -34,9 +34,15 @@ public class ClassLoaderDemo {
 
         // getenv() 和 getProperty() 用于返回系统相关的变量与属性，getenv方法返回的变量大多于系统相关，getProperty方法返回的变量大多与java程序有关。
         Map<String, String> map = System.getenv();
+        String mysql_home = map.get("MYSQL_HOME");
+        String maven_home = map.get("MAVEN_HOME");
+        String java_home = map.get("JAVA_HOME");
+        //系统中添加一个用于测试的环境变量（TEST）
+        String test = map.get("TEST");
         for(Map.Entry<String, String> entry:map.entrySet()){
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
+
     }
 
     @Test
