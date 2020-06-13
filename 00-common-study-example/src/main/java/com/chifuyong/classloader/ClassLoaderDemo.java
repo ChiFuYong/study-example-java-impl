@@ -71,7 +71,38 @@ public class ClassLoaderDemo {
         System.out.println("------------------");
     }
 
+    @Test
+    public void testBootstrapClassLoader() throws ClassNotFoundException {
+        //加载 Bootstrap 类加载器加载的类
+        Class clazz = ClassLoader.getSystemClassLoader().loadClass("java.lang.String");
+        // clazz.ClassLoader = null
+        System.out.println("clazz.ClassLoader = " + clazz.getClassLoader());
+    }
 
+    @Test
+    public void testAppClassLoader() throws ClassNotFoundException {
+        //加载 classpath 下的类
+        Class clazz = ClassLoader.getSystemClassLoader().loadClass("com.chifuyong.classloader.HelloWorld");
+        // clazz.ClassLoader = sun.misc.Launcher$AppClassLoader@18b4aac2
+        System.out.println("clazz.ClassLoader = " + clazz.getClassLoader());
+    }
+
+    @Test
+    public void testExtClassLoader() throws ClassNotFoundException {
+        //加载 ExtClassLoader 类加载器加载的类
+        Class clazz = ClassLoader.getSystemClassLoader().loadClass("com.sun.java.accessibility.AccessBridge");
+        // clazz.ClassLoader = sun.misc.Launcher$ExtClassLoader@3f0ee7cb
+        System.out.println("clazz.ClassLoader = " + clazz.getClassLoader());
+    }
+
+    /**
+     * 自定义 classloader
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     */
     @Test
     public void testClassLoader() throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         //获取 class 文件路径
@@ -83,20 +114,19 @@ public class ClassLoaderDemo {
         System.out.println("class 文件所在路径 = " + str1);
 
         MyClassLoader myClassLoader = new MyClassLoader(str1);
+        MyClassLoader myClassLoader2 = new MyClassLoader(str1);
         // HelloWorld 类详见 study-example-java-impl\classloader\hello
         // hello 是 HelloWorld 所在的包
         Class clazz = myClassLoader.loadClass("hello.HelloWorld");
+        Class clazz2 = myClassLoader.loadClass("hello.HelloWorld");
+        System.out.println(clazz == clazz2);
+        System.out.println("clazz 是否等于 clazz2 ？ " + clazz.equals(clazz2));
         //clazz.ClassLoader = com.chifuyong.classloader.MyClassLoader@7d907bac
         System.out.println("clazz.ClassLoader = " + clazz.getClassLoader());
+        System.out.println("clazz2.ClassLoader = " + clazz2.getClassLoader());
         //通过反射执行方法
         Method method = clazz.getDeclaredMethod("sayHello");
         Object object = clazz.newInstance();
         method.invoke(object);
-
-        //加载 classpath 下的类
-        Class clazz2 = myClassLoader.loadClass("com.chifuyong.classloader.HelloWorld");
-        // clazz2.ClassLoader = sun.misc.Launcher$AppClassLoader@18b4aac2
-        System.out.println("clazz2.ClassLoader = " + clazz2.getClassLoader());
     }
-
 }

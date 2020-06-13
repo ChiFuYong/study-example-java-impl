@@ -19,6 +19,14 @@ public class MyClassLoader extends ClassLoader{
         this.classPath = classPath;
     }
 
+    /**
+     * 重写此方法破不了双亲委派机制，会先去加载 native 方法 defineClass1,然后 jvm 又会去加载 java.lang.Object 类报错。
+     */
+    /*@Override
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+        return findClass(name);
+    }*/
+
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException{
         try {
