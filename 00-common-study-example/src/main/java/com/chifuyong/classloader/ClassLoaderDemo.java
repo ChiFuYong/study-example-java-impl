@@ -59,15 +59,27 @@ public class ClassLoaderDemo {
     @Test
     public void classloaderTest() {
         //Bootstrap 启动类加载器（详见sun.misc.Launcher）
-        System.out.println("properties.getProperty(\"sun.boot.class.path\") = " + System.getProperty("sun.boot.class.path"));
+        String bootDirs = System.getProperty("sun.boot.class.path");
+        System.out.println("properties.getProperty(\"sun.boot.class.path\") = " );
+        for (String path : bootDirs.split(";")) {
+            System.out.println(path);
+        }
         System.out.println("------------------");
 
         //EXtension 扩展类加载器
-        System.out.println("properties.getProperty(\"java.ext.dirs\") = " + System.getProperty("java.ext.dirs"));
+        String extDirs = System.getProperty("java.ext.dirs");
+        System.out.println("properties.getProperty(\"java.ext.dirs\") = ");
+        for (String path : extDirs.split(";")) {
+            System.out.println(path);
+        }
         System.out.println("------------------");
 
         //System 系统类加载器
-        System.out.println("properties.getProperty(\"java.class.path\") = " + System.getProperty("java.class.path"));
+        String appDirs = System.getProperty("java.class.path");
+        System.out.println("properties.getProperty(\"java.class.path\") = " );
+        for (String path : appDirs.split(";")) {
+            System.out.println(path);
+        }
         System.out.println("------------------");
     }
 
