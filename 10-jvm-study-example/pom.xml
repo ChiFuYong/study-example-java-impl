@@ -11,5 +11,13 @@
 
     <artifactId>10-jvm-study-example</artifactId>
 
+    <dependencies>
+        <!-- junit 依赖-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+    </dependencies>
 
 </project>

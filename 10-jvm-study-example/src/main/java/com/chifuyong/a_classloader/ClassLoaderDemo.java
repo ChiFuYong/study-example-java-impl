@@ -1,4 +1,4 @@
-package com.chifuyong.classloader;
+package com.chifuyong.a_classloader;
 
 import org.junit.Test;
 import sun.misc.VM;
@@ -43,17 +43,6 @@ public class ClassLoaderDemo {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
 
-    }
-
-    @Test
-    public void resouceTest() {
-        String str1 = MyClassLoader.class.getResource("").toString();
-        // str1 = file:/D:/idea-project-root/ChiFuYong/study-example-java-impl/00-common-study-example/target/classes/com/chifuyong/classloader/
-        System.out.println("str1 = " + str1);
-
-        // str2 = file:/D:/idea-project-root/ChiFuYong/study-example-java-impl/00-common-study-example/target/classes/
-        String str2 = MyClassLoader.class.getResource("/").toString();
-        System.out.println("str2 = " + str2);
     }
 
     @Test
@@ -107,6 +96,17 @@ public class ClassLoaderDemo {
         System.out.println("clazz.ClassLoader = " + clazz.getClassLoader());
     }
 
+    @Test
+    public void resouceTest() {
+        String str1 = MyClassLoader.class.getResource("").toString();
+        // str1 = file:/D:/idea-project-root/ChiFuYong/study-example-java-impl/00-common-study-example/target/classes/com/chifuyong/classloader/
+        System.out.println("str1 = " + str1);
+
+        // str2 = file:/D:/idea-project-root/ChiFuYong/study-example-java-impl/00-common-study-example/target/classes/
+        String str2 = MyClassLoader.class.getResource("/").toString();
+        System.out.println("str2 = " + str2);
+    }
+
     /**
      * 自定义 classloader
      * @throws ClassNotFoundException
@@ -120,7 +120,7 @@ public class ClassLoaderDemo {
         //获取 class 文件路径
         String str1 = MyClassLoader.class.getResource("/").toString();
         str1 = str1.replace("file:/","");
-        str1 = str1.replace("/00-common-study-example/target/classes/","");
+        str1 = str1.replace("/10-jvm-study-example/target/classes/","");
         str1 = str1 + "/classloader/";
         // str1 = /D:/idea-project-root/ChiFuYong/study-example-java-impl/classloader/hello/
         System.out.println("class 文件所在路径 = " + str1);
