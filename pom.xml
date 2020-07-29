@@ -26,6 +26,7 @@
         <module>08-mq-example</module>
         <module>09-mybatis-example</module>
         <module>10-jvm-study-example</module>
+        <module>11-nio-netty-study-example</module>
     </modules>
 
 </project>
