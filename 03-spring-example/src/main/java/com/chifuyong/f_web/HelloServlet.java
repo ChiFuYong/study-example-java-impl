@@ -30,6 +30,9 @@ public class HelloServlet extends HttpServlet {
                 .getWebApplicationContext(this.getServletContext());
         DemoController demoController1 = (DemoController) applicationContext2.getBean("demoController");
         demoController1.controller();
+
+        String contextConfigLocation = (String) req.getServletContext().getAttribute("contextConfigLocation");
+        System.out.println(contextConfigLocation);
     }
 
     @Override

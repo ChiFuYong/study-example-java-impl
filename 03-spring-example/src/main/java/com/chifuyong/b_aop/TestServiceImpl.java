@@ -10,14 +10,17 @@ import org.springframework.stereotype.Component;
 @Component("testService")
 public class TestServiceImpl implements TestService{
 
+    @Override
     public void add() {
         System.out.println("add ......");
     }
 
+    @Override
     public void edit() {
         System.out.println("edit ......");
     }
 
+    @Override
     public void commit() {
         System.out.println("commit ......");
     }
