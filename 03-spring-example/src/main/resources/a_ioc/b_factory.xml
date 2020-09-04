@@ -12,7 +12,7 @@
     <bean id="factory" class="com.chifuyong.a_ioc.b_factory.Factory">
         <!--这就是 FactoryBean,在 BeanFactory(ApplicationContext IOC容器)中也就是个 Bean,可以产生 Service 这个 Bean-->
     </bean>
-    <bean id="intanc eFactory" class="com.chifuyong.a_ioc.b_factory.Factory" factory-bean="factory" factory-method="createService2"></bean>
+    <bean id="intanceFactory" class="com.chifuyong.a_ioc.b_factory.Factory" factory-bean="factory" factory-method="createService2"></bean>
 
     <!-- 3. FactoryBean 测试-->
     <bean id="env" class="com.chifuyong.a_ioc.b_factory.TestFactoryBean">
