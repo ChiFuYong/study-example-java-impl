@@ -27,6 +27,8 @@
         <module>09-mybatis-example</module>
         <module>10-jvm-study-example</module>
         <module>11-nio-netty-study-example</module>
+        <module>12-hibernate-study-example</module>
+        <module>13-activity-study-example</module>
     </modules>
 
 </project>
