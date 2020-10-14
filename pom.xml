@@ -29,6 +29,7 @@
         <module>11-nio-netty-study-example</module>
         <module>12-hibernate-study-example</module>
         <module>13-activity-study-example</module>
+        <module>14-drools-study-example</module>
     </modules>
 
 </project>
