@@ -8,9 +8,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
+ * Bean 的后置处理器
+ *
  * @Auther: chify
  * @Date: 29/02/2020 09:08
- * @Description:
  */
 public class TestBeanPostProcessor implements BeanPostProcessor {
 
