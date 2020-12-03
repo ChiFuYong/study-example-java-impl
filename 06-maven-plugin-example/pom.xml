@@ -17,19 +17,16 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.2.0.RELEASE</version>
         </dependency>
         <!-- MySQL数据库驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
         </dependency>
         <!-- druid数据库连接池 ，里面依赖了jdk里的jar包-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.0.9</version>
         </dependency>
         <!-- 测试 provided ，打包不会被打进去 。-->
         <dependency>
