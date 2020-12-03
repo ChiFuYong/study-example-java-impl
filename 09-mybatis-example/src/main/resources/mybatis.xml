@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- default 引用 environment 的 id,当前所使用的环境 -->
+    <environments default="default">
+        <!-- 声明可以使用的环境 -->
+        <environment id="default">
+            <!-- 使用原生 JDBC 事务 -->
+            <transactionManager type="JDBC"></transactionManager>
+<!--            <transactionManager type="MANAGED"></transactionManager>-->
+            <dataSource type="POOLED">
+                <!--UNPOOLED不使用连接池-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/blogs-project?serverTimezone=Asia/Shanghai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="0607"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 设置mapper文件 -->
+    <mappers>
+        <mapper resource="mapper/AdminUserDao.xml"/>
+    </mappers>
+</configuration>

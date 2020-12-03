@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.chifuyong.mapper.AdminUserDao">
+  <resultMap id="BaseResultMap" type="cn.chifuyong.entity.AdminUser">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="pass_wd" jdbcType="VARCHAR" property="passWd" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+  </resultMap>
+  <sql id="select*">
+    user_id, user_name, first_name, pass_wd, signature
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="select*" />
+    from admin_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="cn.chifuyong.entity.AdminUser" useGeneratedKeys="true">
+    insert into admin_user (user_name, first_name, pass_wd, 
+      signature)
+    values (#{userName,jdbcType=VARCHAR}, #{firstName,jdbcType=VARCHAR}, #{passWd,jdbcType=VARCHAR}, 
+      #{signature,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="cn.chifuyong.entity.AdminUser" useGeneratedKeys="true">
+    insert into admin_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="passWd != null">
+        pass_wd,
+      </if>
+      <if test="signature != null">
+        signature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWd != null">
+        #{passWd,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        #{signature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chifuyong.entity.AdminUser">
+    update admin_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWd != null">
+        pass_wd = #{passWd,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="cn.chifuyong.entity.AdminUser">
+    update admin_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      pass_wd = #{passWd,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
