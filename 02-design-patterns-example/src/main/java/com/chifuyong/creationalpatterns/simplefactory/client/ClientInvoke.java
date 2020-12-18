@@ -1,4 +1,4 @@
-package com.chifuyong.creationalpatterns.simplefactory.customer;
+package com.chifuyong.creationalpatterns.simplefactory.client;
 
 import com.chifuyong.creationalpatterns.simplefactory.factory.OperationFactory;
 import com.chifuyong.creationalpatterns.simplefactory.api.Operation;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 * @date 2019年10月8日 上午11:02:07
 * @author chify
 */
-public class SimpleFactoryPatternCustomer {
+public class ClientInvoke {
 	
 	public static void main(String[] args) throws Exception {
 		System.out.println("请输入第一位数：");

@@ -1,4 +1,4 @@
-package com.chifuyong.creationalpatterns.singleton.customer;
+package com.chifuyong.creationalpatterns.singleton.client;
 
 import com.chifuyong.creationalpatterns.singleton.item.HungerManSingleton;
 import com.chifuyong.creationalpatterns.singleton.item.LazyManSingleton;
@@ -9,7 +9,7 @@ import com.chifuyong.creationalpatterns.singleton.item.LazyManSingleton;
  * @Date: 2020/4/14
  * @author: chify
  */
-public class TestSingleton {
+public class ClientInvoke {
 	
 	public static void main(String[] args) {
 		//懒汉式

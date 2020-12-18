@@ -1,4 +1,4 @@
-package com.chifuyong.behavioralpatterns.strategy.customer;
+package com.chifuyong.behavioralpatterns.strategy.client;
 
 import com.chifuyong.behavioralpatterns.strategy.context.CaculateAmountContext;
 import com.chifuyong.behavioralpatterns.strategy.context.combinesimplefactory.CaculateAmountCombineSimpleFactoryContext;
@@ -11,7 +11,7 @@ import com.chifuyong.behavioralpatterns.strategy.impl.*;
  * @Date: 2020/4/14
  * @author: chify
  */
-public class StrategyPatternCustomer {
+public class ClientInvoke {
 	
 	public static void main(String[] args) {
 		//策略模式

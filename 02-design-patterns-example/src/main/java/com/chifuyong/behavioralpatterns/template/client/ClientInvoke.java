@@ -1,4 +1,4 @@
-package com.chifuyong.behavioralpatterns.template.customer;
+package com.chifuyong.behavioralpatterns.template.client;
 
 import com.chifuyong.behavioralpatterns.template.api.TemplateAbs;
 import com.chifuyong.behavioralpatterns.template.impl.TemplateA;
@@ -10,7 +10,8 @@ import com.chifuyong.behavioralpatterns.template.impl.TemplateB;
  * @Date: 2020/4/14
  * @author: chify
  */
-public class Test {
+public class ClientInvoke {
+
 	public static void main(String[] args) {
 		// TemplateA
 		TemplateAbs templateA = new TemplateA();
