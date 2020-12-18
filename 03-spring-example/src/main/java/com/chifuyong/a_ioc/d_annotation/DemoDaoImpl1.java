@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository("demoDaoImpl1")
 public class DemoDaoImpl1 implements DemoDao{
 
+    @Override
     public void dao() {
         System.out.println("DemoDaoImpl 1 开启...");
     }

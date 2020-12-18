@@ -18,6 +18,7 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
     /**
      * init-method 方法之前执行
      */
+    @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("初始化前（TestBeanPostProcessor）...."+beanName);
         return bean;
@@ -26,6 +27,7 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
     /**
      * init-method 方法之后执行
      */
+    @Override
     public Object postProcessAfterInitialization(final Object bean, String beanName) throws BeansException {
         System.out.println("初始化后（TestBeanPostProcessor）...."+beanName);
         //动态代理,返回的对象不再是 spring new 的那个对象

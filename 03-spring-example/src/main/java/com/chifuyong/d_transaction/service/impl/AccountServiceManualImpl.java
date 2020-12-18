@@ -24,6 +24,7 @@ public class AccountServiceManualImpl implements AccountService {
         this.transactionTemplate = transactionTemplate;
     }
 
+    @Override
     public void transfer(final String outName, final String inName, final Integer money) {
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             @Override
@@ -36,6 +37,7 @@ public class AccountServiceManualImpl implements AccountService {
         });
     }
 
+    @Override
     public void transfer1(String outName, String inName, Integer money) {
         accountDao.out(outName,money);
         //制造报错

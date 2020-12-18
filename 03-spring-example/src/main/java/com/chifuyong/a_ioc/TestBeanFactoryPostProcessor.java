@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
+    @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         GenericBeanDefinition beanDefinition = (GenericBeanDefinition) beanFactory.getBeanDefinition("service");

@@ -10,6 +10,7 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class SpringAspect implements MethodInterceptor {
 
+    @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         System.out.println("before......");
 

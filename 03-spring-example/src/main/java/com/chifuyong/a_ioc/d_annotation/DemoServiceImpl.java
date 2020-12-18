@@ -38,6 +38,7 @@ public class DemoServiceImpl implements DemoService{
     @Resource(name = "demoDaoImpl1")
     private DemoDao demoDao3;
 
+    @Override
     public void service() {
         System.out.println("进入 DemoServiceImpl...");
         System.out.println("name : "+this.name);

@@ -7,6 +7,7 @@ package com.chifuyong.a_ioc.a_di;
  */
 public class UserDaoImpl implements UserDao{
 
+    @Override
     public void hellWorld() {
         System.out.println("UserDao：Hello World !");
     }

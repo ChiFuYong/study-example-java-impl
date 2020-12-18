@@ -10,14 +10,14 @@ import com.chifuyong.a_ioc.ServiceImpl;
  */
 public class Factory {
 
-    /*
+    /**
     * 静态工厂方式装配 Bean
     * */
     public static Service createService(){
         return new ServiceImpl();
     }
 
-    /*
+    /**
     * 实例工厂方式装配 Bean
     * */
     public Service createService2(){

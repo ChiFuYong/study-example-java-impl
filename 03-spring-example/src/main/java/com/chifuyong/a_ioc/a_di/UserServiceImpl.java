@@ -12,6 +12,7 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
+    @Override
     public void helloWorld() {
         System.out.println("UserService：Hello World !");
         userDao.hellWorld();

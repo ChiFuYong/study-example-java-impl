@@ -21,14 +21,17 @@ public class ServiceImpl implements Service {
         System.out.println("ServiceImpl 构造方法。。。");
     }
 
+    @Override
     public void helloWorld() {
         System.out.println("Hello World!!!");
     }
 
+    @Override
     public void staticFactory(){
         System.out.println("StaticFactory Success !");
     }
 
+    @Override
     public void instanceFactory(){
         System.out.println("InstanceFactory Success !");
     }

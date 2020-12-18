@@ -28,6 +28,7 @@ public class ProxyCGLB {
         enhancer.setSuperclass(testServiceImpl.getClass());
         // 3.设置回调函数
         enhancer.setCallback(new MethodInterceptor() {
+            @Override
             public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
                 //切面before
                 aspect.before();

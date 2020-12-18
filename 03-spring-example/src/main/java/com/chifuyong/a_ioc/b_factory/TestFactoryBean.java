@@ -29,6 +29,7 @@ public class TestFactoryBean implements FactoryBean<Properties> {
      * @return
      * @throws Exception
      */
+    @Override
     public Properties getObject() throws Exception {
         Properties properties = System.getProperties();
         Properties properties1 = new Properties();
@@ -42,6 +43,7 @@ public class TestFactoryBean implements FactoryBean<Properties> {
      * 返回 FactroryBean 创建的 bean 类型
      * @return
      */
+    @Override
     public Class<?> getObjectType() {
         return Properties.class;
     }
@@ -51,6 +53,7 @@ public class TestFactoryBean implements FactoryBean<Properties> {
      * 相当于 scope="singleton"
      * @return
      */
+    @Override
     public boolean isSingleton() {
         return true;
     }
