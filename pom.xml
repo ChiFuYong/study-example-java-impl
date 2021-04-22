@@ -20,7 +20,7 @@
         <spring.version>5.1.9.RELEASE</spring.version>
         <springboot.version>2.1.0.RELEASE</springboot.version>
         <!--开源框架-->
-        <mybatis.version>3.5.5</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <jwt.version>3.10.0</jwt.version>
         <jedis.version>3.1.0</jedis.version>
         <rabbitmq.version>5.6.0</rabbitmq.version>
